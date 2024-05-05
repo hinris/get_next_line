@@ -6,7 +6,7 @@
 /*   By: anrodrig <anrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 20:30:45 by anrodrig          #+#    #+#             */
-/*   Updated: 2024/05/03 19:08:45 by anrodrig         ###   ########.fr       */
+/*   Updated: 2024/05/05 23:26:50 by anrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*ft_strdup(char *src)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	char	*str1;
 	char	*str2;
@@ -77,11 +77,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len;
 	size_t	i;
 
+	len = 0;
 	i = 0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	str1 = (char *)s1;
+	if (!s1 && !s2)
+		return (NULL);
+	if (s1)
+		len = ft_strlen(s1);
+	len += ft_strlen(s2);
+	str1 = s1;
 	str2 = (char *)s2;
-	dest = (char *)malloc(sizeof(char) * len + 1);
+	dest = (char *)malloc(1 + len * sizeof(char));
 	if (!dest)
 		return (NULL);
 	while (*str1)
@@ -89,5 +94,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (*str2)
 		dest[i++] = *str2++;
 	dest[i] = '\0';
+	free(s1);
 	return (dest);
 }
