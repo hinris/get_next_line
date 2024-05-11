@@ -6,7 +6,7 @@
 /*   By: anrodrig <anrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 20:27:07 by anrodrig          #+#    #+#             */
-/*   Updated: 2024/05/05 22:41:41 by anrodrig         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:24:05 by anrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,24 @@
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 1
 # endif
 
+typedef struct s_list
+{
+    char            *strbuf;
+    struct s_list   *next;
+}               t_list;
+
 char	*get_next_line(int fd);
-char	*ft_strcpy(char *dest, const char *src);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(char *src);
-char	*ft_strjoin(char *s1, char const *s2);
-size_t	ft_strlen(const char *s);
+t_list	*ft_lstlast(t_list *lst);
+int		len_to_newline(t_list *list);
+void	copy_str(t_list *list, char *str);
+int		found_newline(t_list *list);
+void	ft_clean(t_list **list, t_list *clean_node, char *buf);
+void    polish_list(t_list **list);
+char    *get_line(t_list *list);
+void    append(t_list **list, char *buf);
+void    create_list(t_list **list, int fd);
 
 #endif
