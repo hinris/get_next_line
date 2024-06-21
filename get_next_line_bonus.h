@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anrodrig <anrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 20:27:07 by anrodrig          #+#    #+#             */
-/*   Updated: 2024/06/21 06:01:39 by anrodrig         ###   ########.fr       */
+/*   Updated: 2024/06/21 06:16:31 by anrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -38,7 +38,7 @@ int		found_newline(t_list *list);
 void	ft_clean(t_list **list, t_list *clean_node, char *buf);
 void    polish_list(t_list **list);
 char    *get_line(t_list *list);
-void    append(t_list **list, char *buf);
+void    append(t_list **list, char *buf, int fd);
 void    create_list(t_list **list, int fd);
 
 #endif

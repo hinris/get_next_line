@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anrodrig <anrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 20:26:47 by anrodrig          #+#    #+#             */
-/*   Updated: 2024/06/21 06:03:28 by anrodrig         ###   ########.fr       */
+/*   Updated: 2024/06/21 06:17:26 by anrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char    *get_line(t_list *list)
 {
@@ -27,17 +27,17 @@ char    *get_line(t_list *list)
     return (next_str);
 }
 
-void    append(t_list **list, char *buf)
+void    append(t_list **list, char *buf, int fd)
 {
     t_list *new_node;
     t_list *last_node;
 
-    last_node = ft_lstlast(*list);
+    last_node = ft_lstlast(list[fd]);
     new_node = malloc(sizeof(t_list));
     if (!new_node)
         return ;
     if (!last_node)
-        *list = new_node;
+        list[fd] = new_node;
     else
         last_node->next = new_node;
     new_node->strbuf = buf;
@@ -49,7 +49,7 @@ void    create_list(t_list **list, int fd)
     int char_read;
     char *buf;
     
-    while (!found_newline(*list))
+    while (!found_newline(list[fd]))
     {
         buf = malloc(BUFFER_SIZE + 1);
         if (!buf)
@@ -61,21 +61,21 @@ void    create_list(t_list **list, int fd)
             return ;
         }
         buf[char_read] = '\0';
-        append(list, buf);
+        append(list, buf, fd);
     }
 }
 char    *get_next_line(int fd)
 {
-    static t_list   *list = NULL;
+    static t_list   *list[4096];
     char            *next_line;
     
-    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
+    if (fd < 0 || fd > 4095 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
         return (NULL);
-    create_list(&list, fd);
-    if (!list)
+    create_list(list, fd);
+    if (!list[fd])
         return (NULL);
-    next_line = get_line(list);
-    polish_list(&list);
+    next_line = get_line(list[fd]);
+    polish_list(&list[fd]);
     return (next_line);
 }
 
