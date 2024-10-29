@@ -6,7 +6,7 @@
 /*   By: anrodrig <anrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:40:15 by anrodrig          #+#    #+#             */
-/*   Updated: 2024/10/29 18:18:15 by anrodrig         ###   ########.fr       */
+/*   Updated: 2024/10/29 18:36:20 by anrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ char *ft_strcut(char *line, char *buffer)
         str[i++] = *line++;
     free(line - 1);
     str[i] = '\n';
-    str[i + 1] + '\0';
+    str[i + 1] = '\0';
     return (str);
 }
