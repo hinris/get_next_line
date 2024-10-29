@@ -5,40 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anrodrig <anrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 20:27:07 by anrodrig          #+#    #+#             */
-/*   Updated: 2024/06/21 06:01:39 by anrodrig         ###   ########.fr       */
+/*   Created: 2024/10/28 18:44:35 by anrodrig          #+#    #+#             */
+/*   Updated: 2024/10/29 18:20:17 by anrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+# define GETGET_NEXT_LINE_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <limits.h>
-# include <string.h>
-# include <fcntl.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-# ifndef BUFFER_SIZE
 # define BUFFER_SIZE 10
-# endif
 
-typedef struct s_list
-{
-    char            *strbuf;
-    struct s_list   *next;
-}               t_list;
-
-char	*get_next_line(int fd);
-t_list	*ft_lstlast(t_list *lst);
-int		len_to_newline(t_list *list);
-void	copy_str(t_list *list, char *str);
-int		found_newline(t_list *list);
-void	ft_clean(t_list **list, t_list *clean_node, char *buf);
-void    polish_list(t_list **list);
-char    *get_line(t_list *list);
-void    append(t_list **list, char *buf);
-void    create_list(t_list **list, int fd);
+char    get_next_line(int fd);
+int ft_breakline(char *buffer);
+int ft_strlen(char *str);
+char *ft_strjoin(char *s1, char *s2, size_t len_s1, size_t len_s2);
+char *ft_strcut(char *line, char *buffer);
 
 #endif
